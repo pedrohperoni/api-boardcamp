@@ -48,10 +48,8 @@ export async function getGames(req, res) {
        `,
         [`${name}%`]
       );
-      console.log("filtrado", name);
       res.send(filteredGames.rows);
     } else {
-      console.log("nao filtrado", name);
       const { rows: games } = await db.query(`
       SELECT 
          games.*, 
