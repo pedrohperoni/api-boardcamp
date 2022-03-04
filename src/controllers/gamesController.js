@@ -36,7 +36,7 @@ export async function getGames(req, res) {
 
   try {
     if (name !== undefined) {
-      const filteredGames = await db.query(
+      const { rows: filteredGames } = await db.query(
         `
          SELECT 
             games.*, 
@@ -48,7 +48,7 @@ export async function getGames(req, res) {
        `,
         [`${name}%`]
       );
-      res.send(filteredGames.rows);
+      res.send(filteredGames);
     } else {
       const { rows: games } = await db.query(`
       SELECT 
