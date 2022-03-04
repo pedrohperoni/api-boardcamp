@@ -4,6 +4,10 @@ export async function postCategories(req, res) {
   try {
     const { name } = req.body;
 
+    if (!name) {
+      res.sendStatus(409);
+    }
+
     const checkDuplicate = await db.query(
       `
          SELECT * 
@@ -22,7 +26,7 @@ export async function postCategories(req, res) {
       INSERT INTO 
       categories (name) 
       VALUES ($1)
-   `,
+      `,
       [name]
     );
     res.sendStatus(201);
