@@ -42,10 +42,10 @@ export async function rentalValidationMiddleware(req, res, next) {
       customerExists.length === 0 ||
       gameExists[0].stockTotal - checkStock.length === 0
     ) {
-      return res.sendStatus(401);
+      return res.sendStatus(400);
     }
     next();
   } catch {
-    res.sendStatus(402);
+    res.sendStatus(400);
   }
 }
