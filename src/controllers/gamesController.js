@@ -2,6 +2,9 @@ import db from "../database.js";
 
 export async function postGames(req, res) {
   const { name, image, stockTotal, categoryId, pricePerDay } = req.body;
+  if (parseInt(stockTotal) < 1 || parseInt(pricePerDay) < 1) {
+    return res.sendStatus(400);
+  }
 
   try {
     const { rows: checkDuplicate } = await db.query(
@@ -19,9 +22,9 @@ export async function postGames(req, res) {
 
     await db.query(
       `
-    INSERT INTO 
-    games (name, image, "stockTotal", "categoryId", "pricePerDay")
-    VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO 
+      games (name, image, "stockTotal", "categoryId", "pricePerDay")
+      VALUES ($1, $2, $3, $4, $5)
       `,
       [name, image, parseInt(stockTotal), categoryId, parseInt(pricePerDay)]
     );
@@ -50,14 +53,15 @@ export async function getGames(req, res) {
       );
       res.send(filteredGames);
     } else {
-      const { rows: games } = await db.query(`
-      SELECT 
-         games.*, 
-         categories.name as "categoryName"
-      FROM games
-      JOIN categories
-      ON games."categoryId"=categories.id
-      `);
+      const { rows: games } = await db.query(
+         `
+         SELECT 
+            games.*, 
+            categories.name as "categoryName"
+         FROM games
+         JOIN categories
+         ON games."categoryId"=categories.id
+         `);
       res.send(games);
     }
   } catch {

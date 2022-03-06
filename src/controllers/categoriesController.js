@@ -10,9 +10,9 @@ export async function postCategories(req, res) {
 
     const checkDuplicate = await db.query(
       `
-         SELECT * 
-         FROM categories 
-         WHERE name=$1
+      SELECT * 
+      FROM categories 
+      WHERE name=$1
        `,
       [name]
     );

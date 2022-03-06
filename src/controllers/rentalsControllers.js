@@ -5,7 +5,7 @@ export async function getRentals(req, res) {
   const { customerId, gameId } = req.query;
   try {
     const { rows: rentals } = await db.query(`
-    SELECT 
+   SELECT 
     rentals.*,
     customers.name AS "customerName",
     games.name AS "gameName",
@@ -148,7 +148,7 @@ export async function deleteRental(req, res) {
     }
 
     await db.query(
-      `
+    `
     DELETE 
     FROM rentals 
     WHERE id=$1

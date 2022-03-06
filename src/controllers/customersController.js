@@ -15,10 +15,11 @@ export async function getCustomers(req, res) {
       );
       res.send(filteredCustomers);
     } else {
-      const { rows: customers } = await db.query(`
-          SELECT * 
-          FROM customers
-          `);
+      const { rows: customers } = await db.query(
+         `
+         SELECT * 
+         FROM customers
+         `);
       res.send(customers);
     }
   } catch {
@@ -32,7 +33,9 @@ export async function getCustomer(req, res) {
   try {
     const { rows: selectedCustomer } = await db.query(
       `
-      SELECT * FROM customers WHERE id=$1
+      SELECT *
+      FROM customers
+      WHERE id=$1
      `,
       [id]
     );
@@ -50,10 +53,10 @@ export async function registerCustomer(req, res) {
   try {
     const { rows: checkDuplicate } = await db.query(
       `
-         SELECT *
-         FROM customers
-         WHERE (cpf = $1)
-         `,
+      SELECT *
+      FROM customers
+      WHERE (cpf = $1)
+      `,
       [cpf]
     );
 
@@ -81,10 +84,10 @@ export async function editCustomer(req, res) {
 
   const { rows: checkDuplicate } = await db.query(
     `
-        SELECT *
-        FROM customers
-        WHERE (cpf = $1)
-        `,
+    SELECT *
+    FROM customers
+    WHERE (cpf = $1)
+    `,
     [cpf]
   );
 

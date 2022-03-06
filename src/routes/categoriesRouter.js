@@ -1,8 +1,5 @@
 import { Router } from "express";
-import {
-  getCategories,
-  postCategories,
-} from "../controllers/categoriesController.js";
+import { getCategories, postCategories } from "../controllers/categoriesController.js";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidationMiddleware.js";
 import categoriesSchema from "../schemas/categoriesSchema.js";
 
@@ -14,6 +11,9 @@ categoriesRouter.post(
   postCategories
 );
 
-categoriesRouter.get("/categories", getCategories);
+categoriesRouter.get(
+   "/categories", 
+   getCategories
+);
 
 export default categoriesRouter;
