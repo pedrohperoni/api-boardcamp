@@ -17,7 +17,6 @@ export async function rentalValidationMiddleware(req, res, next) {
     `,
       [gameId]
     );
-    console.log(gameExists);
 
     const { rows: customerExists } = await db.query(
       `
@@ -33,6 +32,7 @@ export async function rentalValidationMiddleware(req, res, next) {
     SELECT *
     FROM rentals
     WHERE "gameId" = $1
+    AND "returnDate" is null
     `,
       [gameId]
     );

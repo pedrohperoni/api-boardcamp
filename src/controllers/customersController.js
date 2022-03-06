@@ -36,7 +36,6 @@ export async function getCustomer(req, res) {
      `,
       [id]
     );
-    console.log("asea");
     selectedCustomer.length === 0
       ? res.sendStatus(404)
       : res.send(selectedCustomer);
@@ -94,7 +93,7 @@ export async function editCustomer(req, res) {
   }
 
   try {
-    const update = await db.query(
+    await db.query(
       `
       UPDATE customers 
       SET name = $1,
