@@ -43,7 +43,7 @@ export async function getGames(req, res) {
         `
          SELECT 
             games.*, 
-            categories.name as "categoryName" 
+            categories.name AS "categoryName" 
          FROM games 
          JOIN categories ON games."categoryId"=categories.id 
          WHERE LOWER(games.name) 
@@ -57,7 +57,7 @@ export async function getGames(req, res) {
          `
          SELECT 
             games.*, 
-            categories.name as "categoryName"
+            categories.name AS "categoryName"
          FROM games
          JOIN categories
          ON games."categoryId"=categories.id
